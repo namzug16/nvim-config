@@ -44,7 +44,7 @@ return {
         component_separators = '',
         section_separators = '',
         theme = {
-          normal = { c = { fg = colors.green, bg = colors.black } },
+          normal = { c = { fg = colors.green, bg = "NONE" } },
           inactive = { c = { fg = colors.black, bg = colors.green } },
         }
       },
@@ -90,14 +90,14 @@ return {
       function()
         return '▊'
       end,
-      color = { fg = colors.green },
-      padding = { left = 0, right = 1 }, -- We don't need space before this
+      color = { fg = colors.green, bg = "NONE" },
+      padding = { left = 0, right = 1 },
     }
 
     ins_left {
       'filename',
       cond = conditions.buffer_not_empty,
-      color = { fg = colors.green, gui = 'bold' },
+      color = { fg = colors.green, bg = "NONE", gui = 'bold' },
     }
 
 
@@ -105,7 +105,7 @@ return {
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       symbols = { error = ' ', warn = ' ', info = ' ' },
-      color = { fg = colors.green, gui = 'bold' },
+      color = { fg = colors.green, bg = "NONE", gui = 'bold' },
       diagnostics_color = {
         color_error = { fg = colors.red },
         color_warn = { fg = colors.yellow },
@@ -128,7 +128,7 @@ return {
         end
         return ""
       end,
-      color = { fg = colors.green, gui = 'bold' },
+      color = { fg = colors.green, bg = "NONE", gui = 'bold' },
     }
 
     ins_right {
@@ -151,7 +151,7 @@ return {
 
     ins_right {
       'location',
-      color = { fg = colors.green },
+      color = { fg = colors.green, bg = "NONE"},
     }
 
     ins_right {
