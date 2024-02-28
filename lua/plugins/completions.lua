@@ -50,31 +50,6 @@ return {
           { name = 'buffer' },
         })
       })
-
-      local lspconfig = require "lspconfig"
-
-      local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
-
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.gopls.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.denols.setup {
-        capabilities = capabilities,
-        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-      }
-
-      lspconfig.tsserver.setup {
-        capabilities = capabilities,
-        root_dir = lspconfig.util.root_pattern("package.json"),
-        single_file_support = false
-      }
-
-
     end
   }
 }
