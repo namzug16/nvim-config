@@ -88,7 +88,7 @@ return {
 
     ins_left {
       function()
-        return '▊'
+        return '0'
       end,
       color = { fg = colors.green, bg = "NONE" },
       padding = { left = 0, right = 1 },
@@ -156,7 +156,7 @@ return {
 
     ins_right {
       function()
-        return '▊'
+        return '1'
       end,
       color = { fg = colors.green },
       padding = { left = 1 },

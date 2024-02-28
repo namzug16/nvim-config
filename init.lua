@@ -6,6 +6,7 @@ vim.api.nvim_set_option("clipboard", "unnamed")
 
 vim.g.mapleader = " "
 
+-- numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "number"
@@ -38,3 +39,5 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
+
+vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = "#00FF00", bg = "NONE" })
