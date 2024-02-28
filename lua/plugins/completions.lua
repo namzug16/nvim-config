@@ -41,9 +41,9 @@ return {
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
-          -- { name = 'nvim_lsp' },
-          -- { name = 'vsnip' },
+          { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          -- { name = 'vsnip' },
           -- { name = 'ultisnips' },
           -- { name = 'snippy' },
         }, {
