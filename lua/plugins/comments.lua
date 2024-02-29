@@ -1,14 +1,14 @@
 return {
-  'numToStr/Comment.nvim',
+  "numToStr/Comment.nvim",
   opts = {
     padding = true,
     sticky = true,
     ignore = nil,
     toggler = {
-      line = '<leader>cc',
+      line = "<leader>cc",
     },
     opleader = {
-      line = '<leader>cc',
+      line = "<leader>cc",
     },
     extra = {},
     mappings = {

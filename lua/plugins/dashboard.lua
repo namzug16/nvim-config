@@ -29,12 +29,11 @@ return {
         [[                              X. 9  `   '  P )X                              ]],
         [[                              `b  `       '  d'                              ]],
         [[                               `             '                               ]],
-
       },
       opts = {
         hl = "DashboardHeader",
         position = "center",
-      }
+      },
     }
 
     local config = {
@@ -45,11 +44,11 @@ return {
       },
       opts = {
         setup = function()
-          vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#00FF00', bold = true })
+          vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#00FF00", bold = true })
           vim.cmd("autocmd FileType alpha setlocal nofoldenable")
-        end
+        end,
       },
     }
-    require('alpha').setup(config)
+    require("alpha").setup(config)
   end,
 }

@@ -2,12 +2,12 @@ return {
   {
     "echasnovski/mini.indentscope",
     config = function()
-      local indent = require "mini.indentscope"
+      local indent = require("mini.indentscope")
       indent.setup({
         symbol = "│",
         options = { try_as_border = true },
       })
-    end
+    end,
   },
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -33,6 +33,6 @@ return {
           "lazyterm",
         },
       },
-    }
+    },
   },
 }

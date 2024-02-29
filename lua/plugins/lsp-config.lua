@@ -3,7 +3,7 @@ return {
     "williamboman/mason.nvim",
     lazy = false,
     config = function()
-      require "mason".setup({
+      require("mason").setup({
         ensure_installed = {
           -- lua
           "lua_ls",
@@ -21,50 +21,46 @@ return {
           "impl",
         },
       })
-    end
+    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     config = function()
-      require "mason-lspconfig".setup({
+      require("mason-lspconfig").setup({
         auto_install = true,
       })
-    end
+    end,
   },
   {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
       -- keymaps
-      vim.keymap.set('n', "K", vim.lsp.buf.hover, {})
-      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {})
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-      vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
-      vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
-      vim.keymap.set('n', '<leader>cf', function()
-        vim.lsp.buf.format { async = true }
-      end, {})
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 
-      local lsp = require "lspconfig"
+      local lsp = require("lspconfig")
 
-      local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       lsp.lua_ls.setup({
         capabilities = capabilities,
       })
 
-
-      lsp.tsserver.setup {
+      lsp.tsserver.setup({
         capabilities = capabilities,
         root_dir = lsp.util.root_pattern("package.json"),
-        single_file_support = false
-      }
+        single_file_support = false,
+      })
 
-      lsp.denols.setup {
+      lsp.denols.setup({
         capabilities = capabilities,
         root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
-      }
+      })
 
       lsp.gopls.setup({
         capabilities = capabilities,
@@ -108,6 +104,6 @@ return {
           },
         },
       })
-    end
-  }
+    end,
+  },
 }

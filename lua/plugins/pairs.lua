@@ -1,4 +1,4 @@
 return {
-	"echasnovski/mini.pairs",
-	lazy = false,
+  "echasnovski/mini.pairs",
+  lazy = false,
 }

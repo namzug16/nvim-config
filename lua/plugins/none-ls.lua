@@ -1,11 +1,11 @@
 return {
   "nvimtools/none-ls.nvim",
-  optional = true,
   dependencies = {
     "williamboman/mason.nvim",
   },
   config = function()
     local nls = require("null-ls")
+
     nls.setup({
       sources = {
         -- lua
@@ -15,7 +15,9 @@ return {
         nls.builtins.code_actions.impl,
         nls.builtins.formatting.goimports,
         nls.builtins.formatting.gofumpt,
-      }
+      },
     })
-  end
+
+    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
+  end,
 }
