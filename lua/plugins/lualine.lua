@@ -44,9 +44,10 @@ return {
         component_separators = "",
         section_separators = "",
         theme = {
-          normal = { c = { fg = colors.green, bg = "NONE" } },
+          normal = { c = { fg = colors.black, bg = colors.green } },
           inactive = { c = { fg = colors.black, bg = colors.green } },
         },
+        globalstatus = true,
       },
       sections = {
         -- these are to remove the defaults
@@ -88,27 +89,42 @@ return {
 
     ins_left({
       function()
-        return "0"
+        return "000"
       end,
-      color = { fg = colors.green, bg = "NONE" },
+      padding = { left = 0, right = 0 },
+      color = { gui = "bold" },
+    })
+
+    ins_left({
+      "mode",
+      cond = conditions.buffer_not_empty,
+      color = { gui = "bold" },
+    })
+
+    ins_left({
+      function()
+        return "000"
+      end,
+      cond = conditions.buffer_not_empty,
       padding = { left = 0, right = 1 },
+      color = { gui = "bold" },
     })
 
     ins_left({
       "filename",
       cond = conditions.buffer_not_empty,
-      color = { fg = colors.green, bg = "NONE", gui = "bold" },
+      color = { gui = "bold" },
     })
 
     ins_left({
       "diagnostics",
       sources = { "nvim_diagnostic" },
       symbols = { error = " ", warn = " ", info = " " },
-      color = { fg = colors.green, bg = "NONE", gui = "bold" },
       diagnostics_color = {
-        color_error = { fg = colors.red },
-        color_warn = { fg = colors.yellow },
-        color_info = { fg = colors.cyan },
+        error = { fg = colors.black, bg = colors.green },
+        warn = { fg = colors.black, bg = colors.green },
+        info = { fg = colors.black, bg = colors.green },
+        hint = { fg = colors.black, bg = colors.green },
       },
     })
 
@@ -127,12 +143,12 @@ return {
         end
         return ""
       end,
-      color = { fg = colors.green, bg = "NONE", gui = "bold" },
+      color = { gui = "bold" },
     })
 
     ins_right({
       "branch",
-      icon = "",
+      icon = " ",
       color = { gui = "bold" },
     })
 
@@ -141,27 +157,25 @@ return {
       -- Is it me or the symbol for modified us really weird
       symbols = { added = " ", modified = "󰝤 ", removed = " " },
       diff_color = {
-        added = { fg = colors.green },
-        modified = { fg = colors.orange },
-        removed = { fg = colors.red },
+        added = { fg = colors.black, bg = colors.green },
+        modified = { fg = colors.black, bg = colors.green },
+        removed = { fg = colors.black, bg = colors.green },
       },
       cond = conditions.hide_in_width,
     })
 
     ins_right({
       "location",
-      color = { fg = colors.green, bg = "NONE" },
     })
 
     ins_right({
       function()
-        return "1"
+        return "000"
       end,
-      color = { fg = colors.green },
       padding = { left = 1 },
+      color = { gui = "bold" },
     })
 
-    -- Now don't forget to initialize lualine
     lualine.setup(config)
   end,
 }
