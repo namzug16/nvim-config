@@ -19,6 +19,7 @@
   "nvim-lspconfig": { "branch": "master", "commit": "0ebcaedb2feb946e56658e0c9b6155fb6c8ad62b" },
   "nvim-treesitter": { "branch": "master", "commit": "15d521c9235831421e7278c4d3e1139e0d363ded" },
   "nvim-web-devicons": { "branch": "master", "commit": "0bb67ef952ea3eb7b1bac9c011281471d99a27bc" },
+  "oil.nvim": { "branch": "master", "commit": "132b4ea0740c417b9d717411cab4cf187e1fd095" },
   "plenary.nvim": { "branch": "master", "commit": "4f71c0c4a196ceb656c824a70792f3df3ce6bb6d" },
   "telescope.nvim": { "branch": "master", "commit": "d90956833d7c27e73c621a61f20b29fdb7122709" },
   "vim-illuminate": { "branch": "master", "commit": "305bf07b919ac526deb5193280379e2f8b599926" }
