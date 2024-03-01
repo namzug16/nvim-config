@@ -19,6 +19,9 @@ return {
           "gofumpt",
           "gomodifytags",
           "impl",
+
+          --sql
+          "sqlls",
         },
       })
     end,

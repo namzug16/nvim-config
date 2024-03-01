@@ -91,7 +91,7 @@ return {
       function()
         return "000"
       end,
-      padding = { left = 0, right = 0 },
+      padding = { left = 1, right = 0 },
       color = { gui = "bold" },
     })
 
@@ -172,7 +172,7 @@ return {
       function()
         return "000"
       end,
-      padding = { left = 1 },
+      padding = { left = 1, right = 1 },
       color = { gui = "bold" },
     })
 
