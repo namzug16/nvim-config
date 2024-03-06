@@ -1,112 +1,165 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    lazy = false,
-    config = function()
-      require("mason").setup({
-        ensure_installed = {
-          -- lua
-          "lua_ls",
-          "stylua",
+	{
+		"williamboman/mason.nvim",
+		lazy = false,
+		config = function()
+			require("mason").setup({
+				ensure_installed = {
+					-- lua
+					"lua_ls",
+					"stylua",
 
-          -- js/ts
-          "tsserver",
-          "denols",
+					-- bash
+					"bashls",
+					"shellcheck",
 
-          -- golang
-          "gopls",
-          "goimports",
-          "gofumpt",
-          "gomodifytags",
-          "impl",
+					-- web
+					"html",
+					"tailwindcss",
+					-- "htmx",
 
-          --sql
-          "sqlls",
-        },
-      })
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = false,
-    config = function()
-      require("mason-lspconfig").setup({
-        auto_install = true,
-      })
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    lazy = false,
-    config = function()
-      -- keymaps
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+					-- js/ts
+					"tsserver",
+					"denols",
 
-      local lsp = require("lspconfig")
+					-- golang
+					"gopls",
+					"goimports",
+					"gofumpt",
+					"gomodifytags",
+					"impl",
 
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+					--sql
+					"sqlls",
+				},
+			})
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		lazy = false,
+		config = function()
+			require("mason-lspconfig").setup({
+				auto_install = true,
+			})
+		end,
+	},
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		config = function()
+			vim.filetype.add({ extension = { templ = "templ" } })
 
-      lsp.lua_ls.setup({
-        capabilities = capabilities,
-      })
+			-- keymaps
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+			vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
+			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 
-      lsp.tsserver.setup({
-        capabilities = capabilities,
-        root_dir = lsp.util.root_pattern("package.json"),
-        single_file_support = false,
-      })
+			local lsp = require("lspconfig")
 
-      lsp.denols.setup({
-        capabilities = capabilities,
-        root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
-      })
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      lsp.gopls.setup({
-        capabilities = capabilities,
-        keys = {
-          { "<leader>td", "<cmd>lua require('dap-go').debug_test()<CR>", desc = "Debug Nearest (Go)" },
-        },
-        settings = {
-          gopls = {
-            gofumpt = true,
-            codelenses = {
-              gc_details = false,
-              generate = true,
-              regenerate_cgo = true,
-              run_govulncheck = true,
-              test = true,
-              tidy = true,
-              upgrade_dependency = true,
-              vendor = true,
-            },
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-            analyses = {
-              fieldalignment = true,
-              nilness = true,
-              unusedparams = true,
-              unusedwrite = true,
-              useany = true,
-            },
-            usePlaceholders = true,
-            completeUnimported = true,
-            staticcheck = true,
-            directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-            semanticTokens = true,
-          },
-        },
-      })
-    end,
-  },
+			lsp.lua_ls.setup({
+				capabilities = capabilities,
+			})
+
+			lsp.bashls.setup({
+				capabilities = capabilities,
+			})
+
+			lsp.templ.setup({
+				on_attach = function(_, bufnr)
+					local opts = { buffer = bufnr, remap = false }
+					local templ_format = function()
+						local filename = vim.api.nvim_buf_get_name(bufnr)
+						local cmd = "templ fmt " .. vim.fn.shellescape(filename)
+
+						vim.fn.jobstart(cmd, {
+							on_exit = function()
+								-- Reload the buffer only if it's still the current buffer
+								if vim.api.nvim_get_current_buf() == bufnr then
+									vim.cmd("e!")
+								end
+							end,
+						})
+					end
+					vim.keymap.set("n", "<leader>cf", templ_format, opts)
+				end,
+				capabilities = capabilities,
+				filetypes = { "templ" },
+			})
+
+			lsp.html.setup({
+				capabilities = capabilities,
+				filetypes = { "html", "templ" },
+			})
+
+			-- lsp.htmx.setup({
+			-- 	capabilities = capabilities,
+			-- 	filetypes = { "html", "templ" },
+			-- })
+
+			lsp.tailwindcss.setup({
+				capabilities = capabilities,
+				filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+				init_options = { userLanguages = { templ = "html" } },
+			})
+
+			lsp.tsserver.setup({
+				capabilities = capabilities,
+				root_dir = lsp.util.root_pattern("package.json"),
+				single_file_support = false,
+			})
+
+			lsp.denols.setup({
+				capabilities = capabilities,
+				root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
+			})
+
+			lsp.gopls.setup({
+				capabilities = capabilities,
+				keys = {
+					{ "<leader>td", "<cmd>lua require('dap-go').debug_test()<CR>", desc = "Debug Nearest (Go)" },
+				},
+				settings = {
+					gopls = {
+						gofumpt = true,
+						codelenses = {
+							gc_details = false,
+							generate = true,
+							regenerate_cgo = true,
+							run_govulncheck = true,
+							test = true,
+							tidy = true,
+							upgrade_dependency = true,
+							vendor = true,
+						},
+						hints = {
+							assignVariableTypes = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							constantValues = true,
+							functionTypeParameters = true,
+							parameterNames = true,
+							rangeVariableTypes = true,
+						},
+						analyses = {
+							fieldalignment = true,
+							nilness = true,
+							unusedparams = true,
+							unusedwrite = true,
+							useany = true,
+						},
+						usePlaceholders = true,
+						completeUnimported = true,
+						staticcheck = true,
+						directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+						semanticTokens = true,
+					},
+				},
+			})
+		end,
+	},
 }

@@ -3,14 +3,14 @@ vim.g.mapleader = " "
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -36,6 +36,11 @@ vim.keymap.set("n", "<leader>wj", "<C-w>j", { silent = true })
 vim.keymap.set("n", "<leader>wk", "<C-w>k", { silent = true })
 vim.keymap.set("n", "<leader>wc", ":q<CR>", { silent = true })
 
+-- buffers
+vim.keymap.set("n", "<leader>bc", ":bp<bar>sp<bar>bn<bar>bd<CR>", { silent = true })
+vim.keymap.set("n", "<leader>bl", ":bnext<CR>", { silent = true })
+vim.keymap.set("n", "<leader>bh", ":bprev<CR>", { silent = true })
+
 -- save all files
 vim.keymap.set("n", "<leader>wa", ":wa<CR>", {})
 
@@ -51,3 +56,12 @@ vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = color, bg = "NONE" })
+
+-- automatically close brackets
+vim.api.nvim_set_keymap("i", '"', '""<left>', { noremap = true })
+vim.api.nvim_set_keymap("i", "'", "''<left>", { noremap = true })
+vim.api.nvim_set_keymap("i", "(", "()<left>", { noremap = true })
+vim.api.nvim_set_keymap("i", "[", "[]<left>", { noremap = true })
+vim.api.nvim_set_keymap("i", "{", "{}<left>", { noremap = true })
+vim.api.nvim_set_keymap("i", "{<CR>", "{<CR>}<ESC>O", { noremap = true })
+vim.api.nvim_set_keymap("i", "{;<CR>", "{<CR>};<ESC>O", { noremap = true })

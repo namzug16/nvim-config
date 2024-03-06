@@ -16,7 +16,7 @@ return {
         [[9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP]],
         [[ 9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP ]],
         [[  `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'  ]],
-        [[    `9XXXXXXXXXXXP' `9XX'   000    `98v8P'    000   `XXP' `9XXXXXXXXXXXP'    ]],
+        [[    `9XXXXXXXXXXXP' `9XX    000    `98v8P'    000   `XXP' `9XXXXXXXXXXXP'    ]],
         [[        ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~        ]],
         [[                        )b.  .dbo.dP'`v'`9b.odb.  .dX(                        ]],
         [[                      ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.                       ]],

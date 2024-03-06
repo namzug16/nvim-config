@@ -11,6 +11,9 @@ return {
         "gomod",
         "gowork",
         "gosum",
+        "templ",
+        "nvim-ts-autotag",
+
       },
       auto_install = true,
       sync_install = false,
