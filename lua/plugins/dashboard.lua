@@ -1,5 +1,6 @@
 return {
   "goolord/alpha-nvim",
+  lazy = false,
   config = function()
     local fn = vim.fn
     local marginTopPercent = 0.3
