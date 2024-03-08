@@ -45,6 +45,15 @@ return {
 		end,
 	},
 	{
+		"smjonas/inc-rename.nvim",
+		config = function()
+			require("inc_rename").setup()
+			vim.keymap.set("n", "<leader>cr", function()
+				return ":IncRename " .. vim.fn.expand("<cword>")
+			end, { expr = true })
+		end,
+	},
+	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		config = function()

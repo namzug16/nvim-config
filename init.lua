@@ -3,14 +3,14 @@ vim.g.mapleader = " "
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -58,10 +58,42 @@ vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = color, bg = "NONE" })
 
 -- automatically close brackets
-vim.api.nvim_set_keymap("i", '"', '""<left>', { noremap = true })
-vim.api.nvim_set_keymap("i", "'", "''<left>", { noremap = true })
-vim.api.nvim_set_keymap("i", "(", "()<left>", { noremap = true })
-vim.api.nvim_set_keymap("i", "[", "[]<left>", { noremap = true })
-vim.api.nvim_set_keymap("i", "{", "{}<left>", { noremap = true })
-vim.api.nvim_set_keymap("i", "{<CR>", "{<CR>}<ESC>O", { noremap = true })
-vim.api.nvim_set_keymap("i", "{;<CR>", "{<CR>};<ESC>O", { noremap = true })
+function CloseMatchingDelimiter(triggerChar)
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+	if col > 0 then
+		local line = vim.api.nvim_get_current_line()
+		local last_char = line:sub(col, col)
+		if last_char == triggerChar then
+			return vim.api.nvim_replace_termcodes("<right>", true, true, true)
+		else
+			return triggerChar .. triggerChar .. vim.api.nvim_replace_termcodes("<left>", true, true, true)
+		end
+	else
+		return triggerChar .. triggerChar .. vim.api.nvim_replace_termcodes("<left>", true, true, true)
+	end
+end
+
+function AvoidDuplicatingDelimiter(trigger_char, previous_char)
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+	if col > 0 then
+		local line = vim.api.nvim_get_current_line()
+		local next_char = line:sub(col + 1, col + 1)
+		local _previous_char = line:sub(col, col)
+		if _previous_char == previous_char and next_char == trigger_char then
+			return vim.api.nvim_replace_termcodes("<right>", true, true, true)
+		else
+			return trigger_char
+		end
+	else
+		return trigger_char
+	end
+end
+
+vim.api.nvim_set_keymap("i", '"', 'v:lua.CloseMatchingDelimiter("\\"")', { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap("i", "'", 'v:lua.CloseMatchingDelimiter("\'")', { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap("i", "(", "()<left>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", ")", 'v:lua.AvoidDuplicatingDelimiter(")", "(")', { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap("i", "[", "[]<left>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "]", 'v:lua.AvoidDuplicatingDelimiter("]", "[")', { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap("i", "{", "{}<left>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "}", 'v:lua.AvoidDuplicatingDelimiter("}", "{")', { noremap = true, expr = true, silent = true })
