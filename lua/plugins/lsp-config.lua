@@ -13,6 +13,9 @@ return {
 					"bashls",
 					"shellcheck",
 
+          -- markdown
+          "ltex",
+
 					-- web
 					"html",
 					"tailwindcss",
@@ -60,7 +63,7 @@ return {
 			vim.filetype.add({ extension = { templ = "templ" } })
 
 			-- keymaps
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "<leader>ck", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
@@ -75,6 +78,10 @@ return {
 			})
 
 			lsp.bashls.setup({
+				capabilities = capabilities,
+			})
+
+			lsp.ltex.setup({
 				capabilities = capabilities,
 			})
 
@@ -166,6 +173,49 @@ return {
 						staticcheck = true,
 						directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
 						semanticTokens = true,
+					},
+				},
+			})
+
+			local dartExcludedFolders = {
+				vim.fn.expand("$HOME/AppData/Local/Pub/Cache"),
+				vim.fn.expand("$HOME/.pub-cache"),
+				vim.fn.expand("/opt/homebrew/"),
+				vim.fn.expand("$HOME/tools/flutter/"),
+			}
+
+			lsp["dcmls"].setup({
+				capabilities = capabilities,
+				cmd = {
+					"dcm",
+					"start-server",
+				},
+				filetypes = { "dart", "yaml" },
+				settings = {
+					dart = {
+						analysisExcludedFolders = dartExcludedFolders,
+					},
+				},
+			})
+
+			lsp.dartls.setup({
+				capabilities = capabilities,
+				cmd = { "dart", "language-server" },
+				filetypes = { "dart" },
+				root_dir = lsp.util.root_pattern("pubspec.yaml"),
+				init_options = {
+					onlyAnalyzeProjectsWithOpenFiles = false,
+					suggestFromUnimportedLibraries = true,
+					closingLabels = true,
+					outline = false,
+					flutterOutline = false,
+				},
+				settings = {
+					dart = {
+						analysisExcludedFolders = dartExcludedFolders,
+						updateImportsOnRename = true,
+						completeFunctionCalls = true,
+						showTodos = true,
 					},
 				},
 			})

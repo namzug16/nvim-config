@@ -23,6 +23,13 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.api.nvim_set_option("clipboard", "unnamed")
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.spell = true
+	end,
+})
+
 -- numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -42,7 +49,12 @@ vim.keymap.set("n", "<leader>bl", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<leader>bh", ":bprev<CR>", { silent = true })
 
 -- save all files
-vim.keymap.set("n", "<leader>wa", ":wa<CR>", {})
+vim.keymap.set("n", "<leader>wa", ":wa<CR>", { silent = true })
+
+-- extra
+vim.keymap.set({"n", "v"}, "<leader>cd", vim.diagnostic.open_float, { silent = true })
+vim.keymap.set({"n", "v"}, "K", "5k", { silent = true })
+vim.keymap.set({"n", "v"}, "J", "5j", { silent = true })
 
 -- colors
 local color = "#00FF00"
@@ -92,8 +104,23 @@ end
 vim.api.nvim_set_keymap("i", '"', 'v:lua.CloseMatchingDelimiter("\\"")', { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap("i", "'", 'v:lua.CloseMatchingDelimiter("\'")', { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap("i", "(", "()<left>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", ")", 'v:lua.AvoidDuplicatingDelimiter(")", "(")', { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap(
+	"i",
+	")",
+	'v:lua.AvoidDuplicatingDelimiter(")", "(")',
+	{ noremap = true, expr = true, silent = true }
+)
 vim.api.nvim_set_keymap("i", "[", "[]<left>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "]", 'v:lua.AvoidDuplicatingDelimiter("]", "[")', { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap(
+	"i",
+	"]",
+	'v:lua.AvoidDuplicatingDelimiter("]", "[")',
+	{ noremap = true, expr = true, silent = true }
+)
 vim.api.nvim_set_keymap("i", "{", "{}<left>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "}", 'v:lua.AvoidDuplicatingDelimiter("}", "{")', { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap(
+	"i",
+	"}",
+	'v:lua.AvoidDuplicatingDelimiter("}", "{")',
+	{ noremap = true, expr = true, silent = true }
+)
