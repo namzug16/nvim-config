@@ -68,6 +68,7 @@ vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = color, bg = "NONE" })
+vim.api.nvim_set_hl(0, "DashboardHeader", { fg = color, bold = true })
 
 -- automatically close brackets
 function CloseMatchingDelimiter(triggerChar)

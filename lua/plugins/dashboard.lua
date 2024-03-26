@@ -45,7 +45,6 @@ return {
       },
       opts = {
         setup = function()
-          vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#00FF00", bold = true })
           vim.cmd("autocmd FileType alpha setlocal nofoldenable")
         end,
       },
