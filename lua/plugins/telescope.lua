@@ -11,7 +11,13 @@ return {
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 		vim.keymap.set("n", "<leader>bb", builtin.buffers, {})
 
-		-- local telescope = require("telescope")
-		-- telescope.setup()
+		local telescope = require("telescope")
+		telescope.setup({
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+      },
+    })
 	end,
 }
