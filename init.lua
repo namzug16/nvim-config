@@ -30,6 +30,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+--wrapping
+vim.opt.wrap = false;
+
 -- numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
