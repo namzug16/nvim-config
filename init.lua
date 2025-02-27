@@ -58,6 +58,9 @@ vim.keymap.set("n", "<leader>wa", ":wa<CR>", { silent = true })
 vim.keymap.set({"n", "v"}, "<leader>cd", vim.diagnostic.open_float, { silent = true })
 vim.keymap.set({"n", "v"}, "K", "5k", { silent = true })
 vim.keymap.set({"n", "v"}, "J", "5j", { silent = true })
+-- diagnostic navigation
+vim.keymap.set("n", "ej", vim.diagnostic.goto_next, { silent = true })
+vim.keymap.set("n", "ek", vim.diagnostic.goto_prev, { silent = true })
 
 -- colors
 local color = "#00FF00"
