@@ -1,10 +1,11 @@
+local s = "╎"
 return {
   {
     "echasnovski/mini.indentscope",
     config = function()
       local indent = require("mini.indentscope")
       indent.setup({
-        symbol = "│",
+        symbol = s,
         options = { try_as_border = true },
       })
     end,
@@ -14,8 +15,8 @@ return {
     main = "ibl",
     opts = {
       indent = {
-        char = "│",
-        tab_char = "│",
+        char = s,
+        tab_char = s,
       },
       scope = { enabled = false },
       exclude = {

@@ -4,6 +4,5 @@ return {
   name = "noctishc",
   config = function()
     vim.cmd.colorscheme("noctishc")
-    
   end,
 }
