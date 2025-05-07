@@ -18,7 +18,7 @@ return {
 
           -- web
           "html",
-          "tailwindcss",
+          -- "tailwindcss",
 
           -- js/ts
           "typescript-language-server",
@@ -110,11 +110,11 @@ return {
         filetypes = { "html", "templ" },
       })
 
-      lsp.tailwindcss.setup({
-        capabilities = capabilities,
-        filetypes = { "html", "javascript", "typescript", "dart" },
-        init_options = { userLanguages = { templ = "html" } },
-      })
+      -- lsp.tailwindcss.setup({
+      --   capabilities = capabilities,
+      --   filetypes = { "html", "javascript", "typescript", "dart" },
+      --   init_options = { userLanguages = { templ = "html" } },
+      -- })
 
       lsp.ts_ls.setup({
         capabilities = capabilities,

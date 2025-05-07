@@ -36,6 +36,7 @@ vim.opt.wrap = false;
 -- numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.o.signcolumn = "yes"
 
 -- windows
 vim.keymap.set("n", "<leader>wsh", ":split<CR>", { silent = true })
