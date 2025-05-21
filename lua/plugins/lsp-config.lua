@@ -33,6 +33,9 @@ return {
 
           --sql
           "sqlls",
+
+          -- zig
+          "zls",
         },
       })
     end,
@@ -110,12 +113,6 @@ return {
         filetypes = { "html", "templ" },
       })
 
-      -- lsp.tailwindcss.setup({
-      --   capabilities = capabilities,
-      --   filetypes = { "html", "javascript", "typescript", "dart" },
-      --   init_options = { userLanguages = { templ = "html" } },
-      -- })
-
       lsp.ts_ls.setup({
         capabilities = capabilities,
         filetypes = { "javascript", "typescript" },
@@ -173,9 +170,9 @@ return {
 
       lsp.dartls.setup({
         capabilities = capabilities,
-        cmd = { "dart", "language-server" },
+        cmd = { "dart", "language-server", "--protocol=lsp" },
         filetypes = { "dart" },
-        root_dir = lsp.util.root_pattern("pubspec.yaml"),
+        root_markers = { "pubspec.yaml" },
         init_options = {
           onlyAnalyzeProjectsWithOpenFiles = false,
           suggestFromUnimportedLibraries = true,
@@ -185,11 +182,11 @@ return {
         },
         settings = {
           dart = {
-            lineLength = 300,
             analysisExcludedFolders = dartExcludedFolders,
+            enableSdkFormatter = true,
             updateImportsOnRename = true,
             completeFunctionCalls = true,
-            showTodos = true,
+            showTodos = false,
           },
         },
       })
@@ -202,6 +199,10 @@ return {
             },
           },
         },
+      })
+
+      lsp.zls.setup({
+        capabilities = capabilities,
       })
     end,
   },

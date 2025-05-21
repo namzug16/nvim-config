@@ -80,3 +80,10 @@ vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "DashboardHeader", { fg = color, bold = true })
+
+-- Replace Search Command
+vim.api.nvim_create_user_command('RS', function(opts)
+  local search = vim.fn.getreg('/')
+  local replacement = opts.args
+  vim.cmd('%s/\\V' .. search .. '/' .. replacement .. '/g')
+end, { nargs = 1 })

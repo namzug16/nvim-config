@@ -22,15 +22,8 @@ return {
 				nls.builtins.code_actions.impl,
 				nls.builtins.formatting.goimports,
 				nls.builtins.formatting.gofumpt,
-				-- swift
-				nls.builtins.diagnostics.swiftlint,
-				nls.builtins.formatting.swift_format,
-        -- dart
-				nls.builtins.formatting.dart_format.with({
-          extra_args = {"-l", "300"},
-        }),
-        -- js
-        nls.builtins.formatting.prettier,
+				-- js
+				nls.builtins.formatting.prettier,
 			},
 		})
 
