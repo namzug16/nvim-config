@@ -3,14 +3,14 @@ vim.g.mapleader = " "
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -24,11 +24,14 @@ vim.cmd("set shiftwidth=2")
 vim.api.nvim_set_option("clipboard", "unnamed")
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "markdown",
-	callback = function()
-		vim.opt_local.spell = true
-	end,
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.spell = true
+  end,
 })
+
+
+local tbuiltin = require('telescope.builtin')
 
 --wrapping
 vim.opt.wrap = false;
@@ -56,9 +59,9 @@ vim.keymap.set("n", "<leader>bh", ":bprev<CR>", { silent = true })
 vim.keymap.set("n", "<leader>wa", ":wa<CR>", { silent = true })
 
 -- extra
-vim.keymap.set({"n", "v"}, "<leader>cd", vim.diagnostic.open_float, { silent = true })
-vim.keymap.set({"n", "v"}, "1k", "<C-U>zz", { silent = true })
-vim.keymap.set({"n", "v"}, "1j", "<C-D>zz", { silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>cd", vim.diagnostic.open_float, { silent = true })
+vim.keymap.set({ "n", "v" }, "1k", "<C-U>zz", { silent = true })
+vim.keymap.set({ "n", "v" }, "1j", "<C-D>zz", { silent = true })
 
 -- diagnostic navigation
 vim.keymap.set("n", "ej", vim.diagnostic.goto_next, { silent = true })
@@ -69,6 +72,7 @@ vim.opt.foldmethod = "marker"
 
 -- colors
 local color = "#00FF00"
+
 vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "WinSeparator", { fg = color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = color, bg = "NONE" })
@@ -87,3 +91,25 @@ vim.api.nvim_create_user_command('RS', function(opts)
   local replacement = opts.args
   vim.cmd('%s/\\V' .. search .. '/' .. replacement .. '/g')
 end, { nargs = 1 })
+
+-- LSP
+
+vim.lsp.enable({ 'luals', 'bashls', 'ltex', 'html', 'ts_ls', 'gopls', 'dartls', 'clangd' })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client:supports_method('textDocument/completion') then
+      vim.lsp.completion.enable(true, client.id, ev.buf)
+    end
+  end,
+})
+
+vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+vim.keymap.set("n", "grr", tbuiltin.lsp_references, { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+vim.keymap.set('i', '<c-space>', function()
+  vim.lsp.completion.get()
+end)
