@@ -114,8 +114,8 @@ vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = fg_color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = fg_color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = fg_color, bg = "NONE" })
 vim.api.nvim_set_hl(0, "DashboardHeader", { fg = fg_color, bold = true })
-vim.api.nvim_set_hl(0, "StatusLine", { fg = bg_color, bg = fg_color})
-vim.api.nvim_set_hl(0, "StatusLineNC", { fg = fg_color, bg = bg_color})
+vim.api.nvim_set_hl(0, "StatusLine", { fg = bg_color, bg = fg_color })
+vim.api.nvim_set_hl(0, "StatusLineNC", { fg = fg_color, bg = bg_color })
 
 -- Replace Search Command
 vim.api.nvim_create_user_command('RS', function(opts)
@@ -210,15 +210,15 @@ local function mode_icon()
     ["!"] = "SHELL",
     t = "++TERMINAL++"
   }
-  return (modes[mode] or "  ") .. mode:upper()
+  return modes[mode] or ("  " .. mode:upper())
 end
 
 local function diagnostics_summary()
   local icons = {
-    [vim.diagnostic.severity.ERROR] = "✗",
-    [vim.diagnostic.severity.WARN] = "⚠",
-    [vim.diagnostic.severity.INFO] = "ℹ",
-    [vim.diagnostic.severity.HINT] = "💡",
+    [vim.diagnostic.severity.ERROR] = "",
+    [vim.diagnostic.severity.WARN]  = "",
+    [vim.diagnostic.severity.INFO]  = "",
+    [vim.diagnostic.severity.HINT]  = "",
   }
 
   local bufnr = vim.api.nvim_get_current_buf()
@@ -296,10 +296,10 @@ vim.diagnostic.config({
 vim.diagnostic.config({
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "✗",
-      [vim.diagnostic.severity.WARN] = "⚠",
-      [vim.diagnostic.severity.INFO] = "ℹ",
-      [vim.diagnostic.severity.HINT] = "💡",
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "",
+      [vim.diagnostic.severity.HINT]  = "",
     }
   }
 })
