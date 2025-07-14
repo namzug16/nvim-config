@@ -145,7 +145,7 @@ vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 vim.keymap.set('i', '<c-space>', function()
   vim.lsp.completion.get()
 end)
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
 
 -- Copy Full File-Path
 vim.keymap.set("n", "<leader>pa", function()
@@ -210,7 +210,7 @@ local function mode_icon()
     ["!"] = "SHELL",
     t = "++TERMINAL++"
   }
-  return modes[mode] or "  " .. mode:upper()
+  return (modes[mode] or "  ") .. mode:upper()
 end
 
 local function diagnostics_summary()
@@ -283,3 +283,23 @@ local function setup_dynamic_statusline()
 end
 
 setup_dynamic_statusline()
+
+-- Better LSP UI
+vim.diagnostic.config({
+  virtual_text = { prefix = '●' },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "✗",
+      [vim.diagnostic.severity.WARN] = "⚠",
+      [vim.diagnostic.severity.INFO] = "ℹ",
+      [vim.diagnostic.severity.HINT] = "💡",
+    }
+  }
+})
