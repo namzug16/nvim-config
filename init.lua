@@ -124,7 +124,9 @@ vim.api.nvim_create_user_command('RS', function(opts)
   vim.cmd('%s/\\V' .. search .. '/' .. replacement .. '/g')
 end, { nargs = 1 })
 
+-- ============================================================================
 -- LSP
+-- ============================================================================
 
 vim.lsp.enable({ 'luals', 'bashls', 'ltex', 'html', 'ts_ls', 'gopls', 'dartls', 'clangd' })
 
@@ -132,10 +134,25 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf)
+      vim.lsp.completion.enable(true, client.id, ev.buf, {
+        autotrigger = false,
+        convert = function(item)
+          if item.kind == vim.lsp.protocol.CompletionItemKind.Function then
+            return {
+              abbr = item.label,
+              word = item.label,
+              kind = item.kind,
+            }
+          end
+
+          return item
+        end
+      })
     end
   end,
 })
+
+vim.opt.completeopt = { "menu", "menuone", "noselect", "popup", "preview" }
 
 vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
@@ -145,6 +162,7 @@ vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 vim.keymap.set('i', '<c-space>', function()
   vim.lsp.completion.get()
 end)
+
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
 
 -- Copy Full File-Path
