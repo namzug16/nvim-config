@@ -33,8 +33,6 @@ vim.api.nvim_create_autocmd("FileType", {
 local tbuiltin = require('telescope.builtin')
 
 -- Basic settings
--- vim.opt.number = true         -- Line numbers
--- vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.cursorline = true     -- Highlight current line
 vim.o.signcolumn = "yes"
 vim.opt.wrap = false          -- Don't wrap lines
@@ -87,6 +85,7 @@ vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Better J behavior
+-- FIX: it creates a mark z
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
 -- Center screen when jumping

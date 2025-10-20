@@ -41,11 +41,11 @@ return {
       layout = {
         { type = "padding", val = headerPadding },
         header,
-        { type = "button",  val = "" },
       },
       opts = {
         setup = function()
           vim.cmd("autocmd FileType alpha setlocal nofoldenable")
+          vim.cmd("autocmd FileType alpha setlocal nonumber norelativenumber")
         end,
       },
     }
