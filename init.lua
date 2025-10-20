@@ -128,7 +128,7 @@ end, { nargs = 1 })
 -- LSP
 -- ============================================================================
 
-vim.lsp.enable({ 'luals', 'bashls', 'ltex', 'html', 'ts_ls', 'gopls', 'dartls', 'clangd' })
+vim.lsp.enable({ 'luals', 'bashls', 'ltex', 'html', 'ts_ls', 'gopls', 'dartls', 'clangd', 'postgres_lsp' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
@@ -159,9 +159,13 @@ vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "grr", tbuiltin.lsp_references, { noremap = true, silent = true })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+
 vim.keymap.set('i', '<c-space>', function()
   vim.lsp.completion.get()
 end)
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = false
 
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
 
