@@ -33,6 +33,8 @@ vim.api.nvim_create_autocmd("FileType", {
 local tbuiltin = require('telescope.builtin')
 
 -- Basic settings
+vim.opt.number = true         -- Line numbers
+vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.cursorline = true     -- Highlight current line
 vim.o.signcolumn = "yes"
 vim.opt.wrap = false          -- Don't wrap lines
