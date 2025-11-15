@@ -53,14 +53,22 @@ vim.opt.ttimeoutlen = 0                           -- Key code timeout
 vim.opt.autoread = true                           -- Auto reload files changed outside vim
 vim.opt.autowrite = false                         -- Don't auto save
 
--- windows
-vim.keymap.set("n", "<leader>wsh", ":split<CR>", { silent = true })
-vim.keymap.set("n", "<leader>wsv", ":vsplit<CR>", { silent = true })
-vim.keymap.set("n", "<leader>wh", "<C-w>h", { silent = true })
-vim.keymap.set("n", "<leader>wl", "<C-w>l", { silent = true })
-vim.keymap.set("n", "<leader>wj", "<C-w>j", { silent = true })
-vim.keymap.set("n", "<leader>wk", "<C-w>k", { silent = true })
-vim.keymap.set("n", "<leader>wc", ":q<CR>", { silent = true })
+-- split generation
+vim.keymap.set("n", "<leader>sh", ":split<CR>", { silent = true })
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { silent = true })
+
+-- split navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
+vim.keymap.set("n", "<C-c>", ":q<CR>", { silent = true })
+
+-- insert mode navigation
+vim.keymap.set("i", "<C-h>", "<left>")
+vim.keymap.set("i", "<C-l>", "<right>")
+vim.keymap.set("i", "<C-j>", "<down>")
+vim.keymap.set("i", "<C-k>", "<up>")
 
 -- buffers
 vim.keymap.set("n", "<leader>bc", ":bp<bar>sp<bar>bn<bar>bd<CR>", { silent = true })
@@ -87,8 +95,7 @@ vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Better J behavior
--- FIX: it creates a mark z
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+vim.keymap.set("n", "J", "m'J`'", { desc = "Join lines and keep cursor" })
 
 -- Center screen when jumping
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
