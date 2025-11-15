@@ -54,15 +54,15 @@ vim.opt.autoread = true                           -- Auto reload files changed o
 vim.opt.autowrite = false                         -- Don't auto save
 
 -- split generation
-vim.keymap.set("n", "<leader>sh", ":split<CR>", { silent = true })
-vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { silent = true })
+vim.keymap.set("n", "<leader>wsh", ":split<CR>", { silent = true })
+vim.keymap.set("n", "<leader>wsv", ":vsplit<CR>", { silent = true })
 
 -- split navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
-vim.keymap.set("n", "<C-c>", ":q<CR>", { silent = true })
+vim.keymap.set("n", "<leader>wh", "<C-w>h", { silent = true })
+vim.keymap.set("n", "<leader>wl", "<C-w>l", { silent = true })
+vim.keymap.set("n", "<leader>wj", "<C-w>j", { silent = true })
+vim.keymap.set("n", "<leader>wk", "<C-w>k", { silent = true })
+vim.keymap.set("n", "<leader>wc", ":q<CR>", { silent = true })
 
 -- insert mode navigation
 vim.keymap.set("i", "<C-h>", "<left>")
