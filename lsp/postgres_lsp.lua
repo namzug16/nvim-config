@@ -1,5 +1,5 @@
 return {
-  cmd = { "postgrestools", "lsp-proxy"},
+  cmd = { "postgres-language-server", "lsp-proxy"},
   filetypes = { "sql" },
-  root_markers = { "postgrestools.jsonc" },
+  root_markers = { "postgres-language-server.jsonc" },
 }

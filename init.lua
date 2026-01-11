@@ -136,7 +136,7 @@ end, { nargs = 1 })
 -- LSP
 -- ============================================================================
 
-vim.lsp.enable({ 'luals', 'bashls', 'html', 'ts_ls', 'gopls', 'dartls', 'clangd', 'postgres_lsp', 'pyright' })
+vim.lsp.enable({ 'luals', 'bashls', 'html', 'ts_ls', 'gopls', 'dartls', 'clangd', 'postgres_lsp', 'pyright', 'typos_lsp' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)

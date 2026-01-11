@@ -6,7 +6,7 @@ return {
       require("mason").setup({
         ensure_installed = {
           -- lua
-          "lua_ls",
+          "lua-language-server",
           "stylua",
 
           -- bash
@@ -14,12 +14,13 @@ return {
           "shellcheck",
 
           -- markdown
-          "ltex",
+          "ltex-lsp",
 
           -- web
-          "html",
+          "html-lsp",
 
           -- "tailwindcss",
+          "tailwindcss-language-server",
 
           -- js/ts
           "typescript-language-server",
@@ -33,8 +34,13 @@ return {
           "impl",
 
           --sql
-          "sqlls",
+          "postgres-language-server",
 
+          --typos
+          "typos_lsp",
+
+          --python
+          "python-lsp-server",
         },
       })
     end,
