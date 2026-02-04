@@ -30,8 +30,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-local tbuiltin = require('telescope.builtin')
-
 -- Basic settings
 vim.opt.number = true         -- Line numbers
 vim.opt.relativenumber = true -- Relative line numbers
@@ -165,7 +163,6 @@ vim.opt.completeopt = { "menu", "menuone", "noselect", "popup", "preview" }
 vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-vim.keymap.set("n", "grr", tbuiltin.lsp_references, { noremap = true, silent = true })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 
 vim.keymap.set('i', '<c-space>', function()

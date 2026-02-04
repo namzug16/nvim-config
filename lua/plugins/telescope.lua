@@ -13,6 +13,7 @@ return {
     vim.keymap.set("n", "<leader>fm", builtin.git_status, {
       desc = "Find git changed files",
     })
+    vim.keymap.set("n", "grr", builtin.lsp_references, { noremap = true, silent = true })
 
     vim.api.nvim_create_user_command('SS', function(opts)
       builtin.lsp_document_symbols({ query = opts.args })
