@@ -190,9 +190,9 @@ end)
 
 -- Git branch function
 local function git_branch()
-  local branch = vim.fn.system("git branch --show-current 2>/dev/null | tr -d '\n'")
-  if branch ~= "" then
-    return "  " .. branch .. " "
+  local head = vim.b.gitsigns_head
+  if head and head ~= "" then
+    return "  " .. head .. " "
   end
   return ""
 end
